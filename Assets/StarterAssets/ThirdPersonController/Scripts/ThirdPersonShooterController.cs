@@ -1,6 +1,7 @@
 using UnityEngine;
 using Cinemachine;
 using StarterAssets;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
 
 public class ThirdPersonShooterController : MonoBehaviour
@@ -12,6 +13,7 @@ public class ThirdPersonShooterController : MonoBehaviour
     [SerializeField] private Transform debugTransform;
     [SerializeField] private Transform bulletProjectile;
     [SerializeField] private Transform muzzleTransform;
+    [SerializeField] private Rig aimRig;
 
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
@@ -48,6 +50,8 @@ public class ThirdPersonShooterController : MonoBehaviour
             Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
 
             transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
+
+            aimRig.weight = Mathf.Lerp(aimRig.weight, 1f, Time.deltaTime * 20f);
         }
         else
         {
@@ -55,6 +59,8 @@ public class ThirdPersonShooterController : MonoBehaviour
             thirdPersonController.SetSensitivity(normalSensitivity);
             thirdPersonController.SetRotateOnMove(true);
             animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 0f, Time.deltaTime * 10f));
+            
+            aimRig.weight = Mathf.Lerp(aimRig.weight, 0f, Time.deltaTime * 20f);
         }
 
         if (starterAssetsInputs.shoot)
