@@ -154,6 +154,8 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+
+            orientation = transform;
         }
 
         private void Update()
@@ -293,6 +295,19 @@ namespace StarterAssets
 
         private void JumpAndGravity()
         {
+            if (_input.jump && _input.sprint && WallCheck())
+            {
+                print("Climb");
+                climbTimer = maxClimbTime;
+                _verticalVelocity = 5f;
+                
+                _animator.SetBool("Climb", true);
+
+                return;
+            }
+            
+            _animator.SetBool("Climb", false);
+            
             if (Grounded)
             {
                 // reset the fall timeout timer
@@ -409,6 +424,45 @@ namespace StarterAssets
         public void SetRotateOnMove(bool newRotateOnMove)
         {
             _rotateOnMove = newRotateOnMove;
+        }
+        
+        [Header("WallDetection")]
+        public LayerMask whatIsWall;
+        public float detectionLength;
+        public float sphereCastRadius;
+        public float height = 2f;
+        public float maxWallLookAngle;
+        private float wallLookAngle;
+        
+        private Transform orientation;
+        private RaycastHit frontWallHit;
+        private bool wallFront;
+        
+        private Transform lastWall;
+        private Vector3 lastWallNormal;
+        public float minWallNormalAngleChange;
+        
+        [Header("Climbing")]
+        public float climbSpeed;
+        public float maxClimbTime;
+        private float climbTimer;
+        
+        private bool WallCheck()
+        {
+            wallFront = Physics.SphereCast(transform.position + new Vector3(0, height, 0), sphereCastRadius, orientation.forward, out frontWallHit, detectionLength, whatIsWall);
+            wallLookAngle = Vector3.Angle(orientation.forward, -frontWallHit.normal);
+
+            bool newWall = frontWallHit.transform != lastWall || Mathf.Abs(Vector3.Angle(lastWallNormal, frontWallHit.normal)) > minWallNormalAngleChange;
+
+            if (wallFront && newWall)
+            {
+                print("detected");
+                return true;
+
+                // climbJumpsLeft = climbJumps;
+            }
+
+            return false;
         }
     }
 }

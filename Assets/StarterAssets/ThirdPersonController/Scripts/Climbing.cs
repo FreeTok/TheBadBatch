@@ -10,7 +10,6 @@ public class Climbing : MonoBehaviour
     private CharacterController cc;
     private ThirdPersonController pm;
     public LayerMask whatIsWall;
-    private InputActionAsset
 
     [Header("Climbing")]
     public float climbSpeed;
@@ -63,7 +62,7 @@ public class Climbing : MonoBehaviour
     private void StateMachine()
     {
         // State 1 - Climbing
-        if (wallFront && inp && wallLookAngle < maxWallLookAngle && !exitingWall)
+        if (wallFront && wallLookAngle < maxWallLookAngle && !exitingWall)
         {
             if (!climbing && climbTimer > 0) StartClimbing();
 

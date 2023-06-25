@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Cinemachine;
 using StarterAssets;
@@ -14,10 +16,16 @@ public class ThirdPersonShooterController : MonoBehaviour
     [SerializeField] private Transform bulletProjectile;
     [SerializeField] private Transform muzzleTransform;
     [SerializeField] private Rig aimRig;
+    [SerializeField] private GameObject changeCharPanel;
+    [SerializeField] private GameObject[] buttons;
 
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
     private Animator animator;
+
+    public bool switchingCharacter = false;
+    
+    
 
     private void Awake()
     {
@@ -69,6 +77,33 @@ public class ThirdPersonShooterController : MonoBehaviour
             Instantiate(bulletProjectile, muzzleTransform.position, Quaternion.LookRotation(aimDir, Vector3.up));
             starterAssetsInputs.shoot = false;
         }
+        
+        changeCharPanel.SetActive(starterAssetsInputs.characterSwitch);
+        if (starterAssetsInputs.characterSwitch)
+        {
+            print("Switching");
+            switchingCharacter = true;
+        }
+        
+        else if (switchingCharacter)
+        {
+            // Switch
+            print("switch");
+            switchingCharacter = false;
+            
 
+            var pos = (new Vector2(Input.mousePosition.x, Input.mousePosition.y) - screenCenterPoint).normalized;
+            List<float> dists = new List<float>();
+            
+            foreach (var button in buttons)
+            {
+                var dist = (new Vector2(button.transform.position.x, button.transform.position.y) - pos).magnitude;
+                dists.Add(dist);
+            }
+            
+            print(dists.Max());
+            Destroy(buttons[dists.IndexOf(dists.Max())]);
+        }
+        
     }
 }
