@@ -9,6 +9,7 @@ using UnityEngine.UI;
 
 public class ThirdPersonShooterController : MonoBehaviour
 {
+    [Header("Shooting")]
     [SerializeField] private CinemachineVirtualCamera aimVirtualCamera;
     [SerializeField] private float normalSensitivity = 1f;
     [SerializeField] private float aimSensitivity = 0.5f;
@@ -17,24 +18,26 @@ public class ThirdPersonShooterController : MonoBehaviour
     [SerializeField] private Transform bulletProjectile;
     [SerializeField] private Transform muzzleTransform;
     [SerializeField] private Rig aimRig;
+    
+    [Header("Characters")]
     [SerializeField] private GameObject changeCharPanel;
     [SerializeField] private GameObject[] buttons;
+    [SerializeField] private Transform cameraRoot;
+    [SerializeField] private CinemachineVirtualCamera[] cameras;
+    public CircularMenuController changeChar;
+
 
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
     private Animator animator;
-    private CircularMenuController _changeChar;
     
-    public bool switchingCharacter = false;
-    
-    
+    private bool switchingCharacter = false;
 
     private void Awake()
     {
         thirdPersonController = GetComponent<ThirdPersonController>();
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         animator = GetComponent<Animator>();
-        _changeChar = FindObjectOfType<CircularMenuController>();
     }
 
     private void Update()
@@ -86,7 +89,7 @@ public class ThirdPersonShooterController : MonoBehaviour
         {
             switchingCharacter = true;
 
-            var choose = _changeChar.CalculateChoose();
+            var choose = changeChar.CalculateChoose();
             
             if (choose != -1)
             {
@@ -111,7 +114,7 @@ public class ThirdPersonShooterController : MonoBehaviour
             print("switch");
             switchingCharacter = false;
             
-            print(_changeChar.CalculateChoose());
+            changeChar.ChangeCharacter(changeChar.lastElem);
 
             // var pos = (new Vector2(Input.mousePosition.x, Input.mousePosition.y) - screenCenterPoint).normalized;
             // List<float> dists = new List<float>();
@@ -125,6 +128,13 @@ public class ThirdPersonShooterController : MonoBehaviour
             // print(dists.Max());
             // Destroy(buttons[dists.IndexOf(dists.Max())]);
         }
-        
+    }
+
+    public void InitializeCameras()
+    {
+        foreach (var cam in cameras)
+        {
+            cam.Follow = cameraRoot;
+        }
     }
 }

@@ -3,13 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using StarterAssets;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
+using UnityEngine.InputSystem;
 
 public class CircularMenuController : MonoBehaviour
 {
+    [HideInInspector]
     public StarterAssetsInputs _input;
     public int itemCount = 5;
     public int buffer = 10;
-
+    
+    [SerializeField] private GameObject[] characters;
+    
+    private int activeCharacterIndex;
     private Vector2 mouseMovement;
 
     public int lastElem = 1;
@@ -44,7 +50,10 @@ public class CircularMenuController : MonoBehaviour
 
         print(angle);
 
-        lastElem = selectedElement;
+        if (lastElem != -1)
+        {
+            lastElem = selectedElement;
+        }
 
         return selectedElement;
 
@@ -74,5 +83,33 @@ public class CircularMenuController : MonoBehaviour
         // // print(newAngle);
         // lastElem = selectedElement;
         // return selected;
+    }
+    
+    public void ChangeCharacter(int index)
+    {
+        var prevChar = characters[activeCharacterIndex];
+        
+        prevChar.GetComponent<CharacterController>().enabled = false;
+        prevChar.GetComponent<ThirdPersonController>().enabled = false;
+        prevChar.GetComponent<PlayerInput>().DeactivateInput();
+        prevChar.GetComponent<PlayerInput>().enabled = false;
+        prevChar.GetComponent<ThirdPersonShooterController>().enabled = false;
+        prevChar.GetComponent<RigBuilder>().enabled = false;
+
+        activeCharacterIndex = index;
+        
+        var newChar = characters[index];
+
+        newChar.GetComponent<ThirdPersonController>().enabled = true;
+        newChar.GetComponent<RigBuilder>().enabled = true;
+        newChar.GetComponent<PlayerInput>().enabled = true;
+        newChar.GetComponent<ThirdPersonShooterController>().enabled = true;
+        newChar.GetComponent<CharacterController>().enabled = true;
+
+        
+        newChar.GetComponent<ThirdPersonShooterController>().InitializeCameras();
+        newChar.GetComponent<ThirdPersonController>().Initialize();
+
+
     }
 }

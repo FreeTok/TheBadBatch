@@ -138,6 +138,11 @@ namespace StarterAssets
 
         private void Start()
         {
+            Initialize(); 
+        }
+
+        public void Initialize()
+        {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
@@ -156,6 +161,11 @@ namespace StarterAssets
             _fallTimeoutDelta = FallTimeout;
 
             orientation = transform;
+
+            _playerInput.SwitchCurrentControlScheme("KeyboardMouse");
+            _playerInput.ActivateInput();
+            
+            GetComponent<ThirdPersonShooterController>().changeChar._input = _input;
         }
 
         private void Update()

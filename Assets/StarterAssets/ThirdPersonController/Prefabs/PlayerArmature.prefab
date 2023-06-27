@@ -1144,6 +1144,7 @@ MonoBehaviour:
   JumpTimeout: 0.3
   FallTimeout: 0.15
   Grounded: 1
+  climbing: 0
   GroundedOffset: -0.14
   GroundedRadius: 0.28
   GroundLayers:
@@ -1154,6 +1155,16 @@ MonoBehaviour:
   BottomClamp: -30
   CameraAngleOverride: 0
   LockCameraPosition: 0
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 0
+  detectionLength: 0
+  sphereCastRadius: 0
+  height: 2
+  maxWallLookAngle: 0
+  minWallNormalAngleChange: 0
+  climbSpeed: 0
+  maxClimbTime: 0
 --- !u!114 &5885216827943657505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1189,6 +1200,7 @@ MonoBehaviour:
   sprint: 0
   aim: 0
   shoot: 0
+  characterSwitch: 0
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
