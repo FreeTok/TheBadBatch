@@ -5,6 +5,7 @@ using Cinemachine;
 using StarterAssets;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class ThirdPersonShooterController : MonoBehaviour
 {
@@ -22,7 +23,8 @@ public class ThirdPersonShooterController : MonoBehaviour
     private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
     private Animator animator;
-
+    private CircularMenuController _changeChar;
+    
     public bool switchingCharacter = false;
     
     
@@ -32,6 +34,7 @@ public class ThirdPersonShooterController : MonoBehaviour
         thirdPersonController = GetComponent<ThirdPersonController>();
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         animator = GetComponent<Animator>();
+        _changeChar = FindObjectOfType<CircularMenuController>();
     }
 
     private void Update()
@@ -81,8 +84,25 @@ public class ThirdPersonShooterController : MonoBehaviour
         changeCharPanel.SetActive(starterAssetsInputs.characterSwitch);
         if (starterAssetsInputs.characterSwitch)
         {
-            print("Switching");
             switchingCharacter = true;
+
+            var choose = _changeChar.CalculateChoose();
+            
+            if (choose != -1)
+            {
+                foreach (var button in buttons)
+                {
+                    if (button == buttons[choose])
+                    {
+                        button.GetComponent<Image>().color = Color.blue;
+                    }
+
+                    else
+                    {
+                        button.GetComponent<Image>().color = Color.white;
+                    }
+                }
+            }
         }
         
         else if (switchingCharacter)
@@ -91,18 +111,19 @@ public class ThirdPersonShooterController : MonoBehaviour
             print("switch");
             switchingCharacter = false;
             
+            print(_changeChar.CalculateChoose());
 
-            var pos = (new Vector2(Input.mousePosition.x, Input.mousePosition.y) - screenCenterPoint).normalized;
-            List<float> dists = new List<float>();
-            
-            foreach (var button in buttons)
-            {
-                var dist = (new Vector2(button.transform.position.x, button.transform.position.y) - pos).magnitude;
-                dists.Add(dist);
-            }
-            
-            print(dists.Max());
-            Destroy(buttons[dists.IndexOf(dists.Max())]);
+            // var pos = (new Vector2(Input.mousePosition.x, Input.mousePosition.y) - screenCenterPoint).normalized;
+            // List<float> dists = new List<float>();
+            //
+            // foreach (var button in buttons)
+            // {
+            //     var dist = (new Vector2(button.transform.position.x, button.transform.position.y) - pos).magnitude;
+            //     dists.Add(dist);
+            // }
+            //
+            // print(dists.Max());
+            // Destroy(buttons[dists.IndexOf(dists.Max())]);
         }
         
     }
