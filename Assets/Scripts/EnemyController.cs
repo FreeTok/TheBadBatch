@@ -51,8 +51,11 @@ public class EnemyController : MonoBehaviour
             rigidbody.constraints = RigidbodyConstraints.None;
         }
         
-        Destroy(GetComponent<EnemyMovement>());
+        EnemyMovement toDestroy = GetComponent<EnemyMovement>();
+        toDestroy.StopMove();
+        Destroy(toDestroy);
         Destroy(GetComponent<Animator>());
+        
         Destroy(this);
     }
 }
