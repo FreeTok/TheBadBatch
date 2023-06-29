@@ -1,36 +1,35 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Cinemachine;
 using StarterAssets;
 using UnityEngine.Animations.Rigging;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class ThirdPersonShooterController : MonoBehaviour
+public class ThirdPersonShooterControllerBehaviour : MonoBehaviour
 {
     [Header("Shooting")] 
     public WeaponController weaponController;
-    [SerializeField] private CinemachineVirtualCamera aimVirtualCamera;
-    [SerializeField] private float normalSensitivity = 1f;
-    [SerializeField] private float aimSensitivity = 0.5f;
-    [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
-    [SerializeField] private Rig aimRig;
-    [SerializeField] private Transform aimDir;
+    [SerializeField] protected CinemachineVirtualCamera aimVirtualCamera;
+    [SerializeField] protected float normalSensitivity = 1f;
+    [SerializeField] protected float aimSensitivity = 0.5f;
+    [SerializeField] protected LayerMask aimColliderLayerMask = new LayerMask();
+    [SerializeField] protected Rig aimRig;
+    [SerializeField] protected Transform aimDir;
     
     [Header("Characters")]
-    [SerializeField] private GameObject changeCharPanel;
-    [SerializeField] private GameObject[] buttons;
-    [SerializeField] private Transform cameraRoot;
-    [SerializeField] private CinemachineVirtualCamera[] cameras;
+    [SerializeField] protected GameObject changeCharPanel;
+    [SerializeField] protected GameObject[] buttons;
+    [SerializeField] protected Transform cameraRoot;
+    [SerializeField] protected CinemachineVirtualCamera[] cameras;
     public CircularMenuController changeChar;
 
 
-    private ThirdPersonController thirdPersonController;
-    private StarterAssetsInputs starterAssetsInputs;
-    private Animator animator;
+    protected ThirdPersonController thirdPersonController;
+    protected StarterAssetsInputs starterAssetsInputs;
+    protected Animator animator;
     
     private bool switchingCharacter = false;
+
+    protected Vector3 _mouseWorldPosition;
 
     private void Awake()
     {
@@ -41,45 +40,26 @@ public class ThirdPersonShooterController : MonoBehaviour
 
     private void Update()
     {
-        Vector3 mouseWorldPosition = Vector3.zero;
-        
         Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderLayerMask))
         {
             aimDir.position = raycastHit.point;
-            mouseWorldPosition = raycastHit.point;
+            _mouseWorldPosition = raycastHit.point;
         }
         
         if (starterAssetsInputs.aim)
         {
-            aimVirtualCamera.gameObject.SetActive(true);
-            thirdPersonController.SetSensitivity(aimSensitivity);
-            thirdPersonController.SetRotateOnMove(false);
-            animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 1f, Time.deltaTime * 10f));
-
-            Vector3 worldAimTarget = mouseWorldPosition;
-            worldAimTarget.y = transform.position.y;
-            Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
-
-            transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
-
-            aimRig.weight = Mathf.Lerp(aimRig.weight, 1f, Time.deltaTime * 20f);
+            Aim();
         }
         else
         {
-            aimVirtualCamera.gameObject.SetActive(false);
-            thirdPersonController.SetSensitivity(normalSensitivity);
-            thirdPersonController.SetRotateOnMove(true);
-            animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 0f, Time.deltaTime * 10f));
-            
-            aimRig.weight = Mathf.Lerp(aimRig.weight, 0f, Time.deltaTime * 20f);
+            DisAim();
         }
 
         if (starterAssetsInputs.shoot)
         {
-            weaponController.Shoot(mouseWorldPosition);
-            starterAssetsInputs.shoot = false;
+            Shoot();
         }
         
         changeCharPanel.SetActive(starterAssetsInputs.characterSwitch);
@@ -111,8 +91,10 @@ public class ThirdPersonShooterController : MonoBehaviour
             // Switch
             print("switch");
             switchingCharacter = false;
-            
-            changeChar.ChangeCharacter(changeChar.lastElem);
+
+            //TODO
+            print(changeChar.lastElem);
+            Events.OnCharacterChanged?.Invoke((CharactersController.Characters) changeChar.lastElem);
 
             // var pos = (new Vector2(Input.mousePosition.x, Input.mousePosition.y) - screenCenterPoint).normalized;
             // List<float> dists = new List<float>();
@@ -134,5 +116,20 @@ public class ThirdPersonShooterController : MonoBehaviour
         {
             cam.Follow = cameraRoot;
         }
+    }
+
+    protected virtual void Aim()
+    {
+        
+    }
+
+    protected virtual void DisAim()
+    {
+        
+    }
+
+    protected virtual void Shoot()
+    {
+
     }
 }

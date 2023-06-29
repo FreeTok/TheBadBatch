@@ -165,7 +165,7 @@ namespace StarterAssets
             _playerInput.SwitchCurrentControlScheme("KeyboardMouse");
             _playerInput.ActivateInput();
             
-            GetComponent<ThirdPersonShooterController>().changeChar._input = _input;
+            GetComponent<ThirdPersonShooterControllerBehaviour>().changeChar._input = _input;
         }
 
         private void Update()

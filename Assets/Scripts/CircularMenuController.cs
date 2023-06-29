@@ -13,7 +13,6 @@ public class CircularMenuController : MonoBehaviour
     public int itemCount = 5;
     public int buffer = 10;
     
-    [SerializeField] private GameObject[] characters;
     
     private int activeCharacterIndex;
     private Vector2 mouseMovement;
@@ -83,33 +82,5 @@ public class CircularMenuController : MonoBehaviour
         // // print(newAngle);
         // lastElem = selectedElement;
         // return selected;
-    }
-    
-    public void ChangeCharacter(int index)
-    {
-        var prevChar = characters[activeCharacterIndex];
-        
-        prevChar.GetComponent<CharacterController>().enabled = false;
-        prevChar.GetComponent<ThirdPersonController>().enabled = false;
-        prevChar.GetComponent<PlayerInput>().DeactivateInput();
-        prevChar.GetComponent<PlayerInput>().enabled = false;
-        prevChar.GetComponent<ThirdPersonShooterController>().enabled = false;
-        prevChar.GetComponent<RigBuilder>().enabled = false;
-
-        activeCharacterIndex = index;
-        
-        var newChar = characters[index];
-
-        newChar.GetComponent<ThirdPersonController>().enabled = true;
-        newChar.GetComponent<RigBuilder>().enabled = true;
-        newChar.GetComponent<PlayerInput>().enabled = true;
-        newChar.GetComponent<ThirdPersonShooterController>().enabled = true;
-        newChar.GetComponent<CharacterController>().enabled = true;
-
-        
-        newChar.GetComponent<ThirdPersonShooterController>().InitializeCameras();
-        newChar.GetComponent<ThirdPersonController>().Initialize();
-
-
     }
 }
