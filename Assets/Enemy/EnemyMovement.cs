@@ -5,50 +5,63 @@ using UnityEngine.AI;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public Transform[] waypoints;   
+    public Transform[] Waypoints;
+    public float DelayOnPoint = 0.5f;
+    
     private int currentWaypointIndex;   
 
     private NavMeshAgent navAgent;  
     private Animator animator;
 
+    private FieldOfView fieldOfView;
+
+    public bool CanSeePlayer;
     public bool IsMoved = false;
 
     void Start()
     {
         navAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        fieldOfView = GetComponentInChildren<FieldOfView>();
+        
         currentWaypointIndex = 0;
     }
 
     public void StartMove()
     {
         IsMoved = true;
-        MoveToWaypoint(waypoints[currentWaypointIndex]);
+        MoveToWaypoint(Waypoints[currentWaypointIndex]);
     }
 
     void Update()
     {
-        if (!IsMoved) return;
-        
+        if (IsMoved) PatrolMoving();
+
+        CanSeePlayer = fieldOfView.canSeePlayer;
+    }
+    
+
+    void PatrolMoving()
+    {
         // Если враг достиг текущей точки, перемещаем его к следующей
         if (!navAgent.pathPending && navAgent.remainingDistance < 0.5f)
         {
             currentWaypointIndex++;
             
             // Если достигнут конец массива точек, враг возвращается к первой точке
-            if (currentWaypointIndex >= waypoints.Length)
+            if (currentWaypointIndex >= Waypoints.Length)
             {
                 currentWaypointIndex = 0;
             }
-            MoveToWaypoint(waypoints[currentWaypointIndex]);
+            MoveToWaypoint(Waypoints[currentWaypointIndex]);
             
+            animator.SetBool("isPatrolling", false);
             StopMove();
         }
     }
 
-    void StopMove()
+    public void StopMove()
     {
-        animator.SetBool("isPatrolling", false);
         navAgent.SetDestination(transform.position);
     }
 
