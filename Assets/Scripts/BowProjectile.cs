@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletProjectile : MonoBehaviour
+public class BowProjectile : MonoBehaviour
 {
     [HideInInspector]
     public float damage;
@@ -11,11 +11,6 @@ public class BulletProjectile : MonoBehaviour
     
     protected Rigidbody rb;
     
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
-
     public void SetupBullet(float newDamage, float speed)
     {
         damage = newDamage;
@@ -23,14 +18,17 @@ public class BulletProjectile : MonoBehaviour
         
         Go();
     }
-
-    protected virtual void Go()
+    
+    private void Go()
     {
+        rb = gameObject.AddComponent<Rigidbody>();
+        rb.isKinematic = false;
+        
         rb.velocity = transform.forward * _speed;
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
+        rb.isKinematic = true;
     }
 }

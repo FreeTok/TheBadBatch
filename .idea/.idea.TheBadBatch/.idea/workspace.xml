@@ -6,30 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="2072b020-bf5f-4e23-9f5c-c99f0c91e648" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TheBadBatch/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TheBadBatch/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/Character/Anims/TPAnimController.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Models/Character/Anims/TPAnimController.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/SSR.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/SSR/source.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/SSR/source/SSR-56_low01.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/SSR/source/SSR-56_low01.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/SSR/textures.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/SSR/textures/GUN.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/SSR/textures/GUN.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/SSR/textures/GUN_Base_color.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/SSR/textures/GUN_Base_color.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/SSR/textures/GUN_Emissive.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/SSR/textures/GUN_Emissive.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/SSR/textures/GUN_Metallic.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/SSR/textures/GUN_Metallic.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/SSR/textures/GUN_Mixed_AO.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/SSR/textures/GUN_Mixed_AO.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/SSR/textures/GUN_Normal_OpenGL.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/SSR/textures/GUN_Normal_OpenGL.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/SSR/textures/GUN_Roughness.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Models/SSR/textures/GUN_Roughness.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/CircularMenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CircularMenuController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Character/Anims/Ch39_nonPBR@Rifle Aiming Idle.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Models/Character/Anims/Ch39_nonPBR@Rifle Aiming Idle.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AssaultRiflePersonController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AssaultRiflePersonController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BowPersonController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BowPersonController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/BulletProjectile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/BulletProjectile.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/ThirdPersonController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ThirdPersonController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ThirdPersonShooterController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ThirdPersonShooterController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WeaponController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/WeaponController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Scenes/Playground.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StarterAssets/ThirdPersonController/Scenes/Playground.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,6 +28,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Enemy/IdleBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AssaultRiflePersonController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/BowPersonController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/BowProjectile.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/BowWeaponController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Events.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ThirdPersonShooterControllerBehaviour.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.6.1/InputSystem/Plugins/PlayerInput/PlayerInput.cs" root0="SKIP_HIGHLIGHTING" />
@@ -58,27 +43,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Discover.Launch.Via.Unity&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev-k&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Discover.Launch.Via.Unity": "true",
+    "FindInProjectState.customScopeName": "Solution",
+    "FindInProjectState.isCustomScope": "true",
+    "FindInProjectState.isProjectScope": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "dev-k",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\FreeTok\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\FreeTok\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\FreeTok\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\FreeTok\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\DecompilerCache",
+      "C:\\Users\\FreeTok\\AppData\\Roaming\\JetBrains\\Rider2023.2\\resharper-host\\SourcesCache",
+      "C:\\Users\\FreeTok\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Programs\Development\Engines\2022.3.3f1\Editor\Unity.exe" />
@@ -137,7 +125,8 @@
       <workItem from="1687953827306" duration="112000" />
       <workItem from="1687953958315" duration="76000" />
       <workItem from="1687954089083" duration="4891000" />
-      <workItem from="1687988667661" duration="7285000" />
+      <workItem from="1687988667661" duration="7833000" />
+      <workItem from="1688074929888" duration="8167000" />
     </task>
     <servers />
   </component>

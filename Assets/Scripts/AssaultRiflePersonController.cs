@@ -6,7 +6,7 @@ public class AssaultRiflePersonController : ThirdPersonShooterControllerBehaviou
 {
     protected override void Aim()
     {
-        aimVirtualCamera.gameObject.SetActive(true);
+        aimVirtualCamera.gameObject.SetActive(false);
         thirdPersonController.SetSensitivity(aimSensitivity);
         thirdPersonController.SetRotateOnMove(false);
         animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 1f, Time.deltaTime * 10f));
