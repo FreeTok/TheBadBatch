@@ -15,12 +15,19 @@ public class ThirdPersonShooterControllerBehaviour : MonoBehaviour
     [SerializeField] protected Rig aimRig;
     [SerializeField] protected Transform aimDir;
     
+    
     [Header("Characters")]
     [SerializeField] protected GameObject changeCharPanel;
     [SerializeField] protected GameObject[] buttons;
     [SerializeField] protected Transform cameraRoot;
     [SerializeField] protected CinemachineVirtualCamera[] cameras;
     public CircularMenuController changeChar;
+
+    [Header("Abilities")]
+    [SerializeField] protected float firstAbilReload = 10f;
+    [SerializeField] protected float secondAbilReload = 10f;
+
+    private float _firstAbilLastUse = -1, _secondAbilLastUse = -1;
 
 
     protected ThirdPersonController thirdPersonController;
@@ -60,6 +67,30 @@ public class ThirdPersonShooterControllerBehaviour : MonoBehaviour
         if (starterAssetsInputs.shoot)
         {
             Shoot();
+        }
+
+        if (starterAssetsInputs.firstAbil)
+        {
+            print(Time.time - _firstAbilLastUse);
+            if (Time.time - _firstAbilLastUse < firstAbilReload && _firstAbilLastUse != -1)
+            {
+                starterAssetsInputs.firstAbil = false;
+                return;
+            }
+            _firstAbilLastUse = Time.time;
+            FirstAbil();
+        }
+        
+        if (starterAssetsInputs.secondAbil)
+        {
+            if (Time.time - _secondAbilLastUse < secondAbilReload && _secondAbilLastUse != -1)
+            {
+                starterAssetsInputs.secondAbil = false;
+                return;
+            }
+            
+            _secondAbilLastUse = Time.time;
+            SecondAbil();
         }
         
         changeCharPanel.SetActive(starterAssetsInputs.characterSwitch);
@@ -129,6 +160,16 @@ public class ThirdPersonShooterControllerBehaviour : MonoBehaviour
     }
 
     protected virtual void Shoot()
+    {
+
+    }    
+    
+    protected virtual void FirstAbil()
+    {
+
+    }
+    
+    protected virtual void SecondAbil()
     {
 
     }

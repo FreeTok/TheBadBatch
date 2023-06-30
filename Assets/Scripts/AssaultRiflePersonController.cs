@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class AssaultRiflePersonController : ThirdPersonShooterControllerBehaviour
 {
+    [Header("Detector Ability")]
+    [SerializeField] private float detectorLength = 20f;
+    [SerializeField] private float detectionTime = 5f;
+    
     protected override void Aim()
     {
         aimVirtualCamera.gameObject.SetActive(true);
@@ -34,5 +38,27 @@ public class AssaultRiflePersonController : ThirdPersonShooterControllerBehaviou
     {
         weaponController.Shoot(_mouseWorldPosition);
         starterAssetsInputs.shoot = false;
+    }
+
+    protected override void FirstAbil()
+    {
+        print("FirstAbil");
+        starterAssetsInputs.firstAbil = false;
+
+        var allEnemies = FindObjectsOfType<EnemyController>();
+
+        foreach (var enemy in allEnemies)
+        {
+            if ((enemy.transform.position - transform.position).magnitude <= detectorLength)
+            {
+                enemy.Outline(detectionTime);
+            }
+        }
+        //TODO scan
+    }
+    
+    protected override void SecondAbil()
+    {
+        //TODO Defender
     }
 }

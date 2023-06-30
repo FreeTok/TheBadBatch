@@ -11,14 +11,18 @@ public class EnemyController : MonoBehaviour
     private GetDamage[] _getDamages;
     private Rigidbody[] _rigidbodies;
 
+    private Outline _outline;
+
     private void Awake()
     {
         _getDamages = GetComponentsInChildren<GetDamage>();
         _rigidbodies = GetComponentsInChildren<Rigidbody>();
+        _outline = GetComponent<Outline>();
     }
 
     private void Start()
     {
+        _outline.enabled = false;
         _health = maxHealth;
 
         foreach (var getDamage in _getDamages)
@@ -55,7 +59,20 @@ public class EnemyController : MonoBehaviour
         toDestroy.StopMove();
         Destroy(toDestroy);
         Destroy(GetComponent<Animator>());
+        Destroy(_outline);
         
         Destroy(this);
+    }
+
+    public void Outline(float time)
+    {
+        Invoke(nameof(DisableOutline), time);
+        
+        _outline.enabled = true;
+    }
+
+    private void DisableOutline()
+    {
+        _outline.enabled = false;
     }
 }

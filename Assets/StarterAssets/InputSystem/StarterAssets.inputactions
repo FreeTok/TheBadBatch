@@ -67,6 +67,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "FirstAbil",
+                    "type": "Button",
+                    "id": "67741ac2-9ace-4675-9915-4feb34a559a9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SecondAbil",
+                    "type": "Button",
+                    "id": "9e72a3d1-cef3-40e7-9268-b3a8f7a6fd12",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -298,6 +316,28 @@
                     "processors": "",
                     "groups": "KeyboardMouse",
                     "action": "CharacterSwitch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f4b46224-cd48-493a-af7f-edd7997aa8ba",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FirstAbil",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "51874a04-0739-479f-b369-287b22817e0a",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SecondAbil",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

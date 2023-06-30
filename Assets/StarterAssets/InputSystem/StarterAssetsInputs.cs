@@ -23,6 +23,10 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 
+		[Header("Abilities")]
+		public bool firstAbil;
+		public bool secondAbil;
+
 #if ENABLE_INPUT_SYSTEM
 		public void OnMove(InputValue value)
 		{
@@ -61,6 +65,16 @@ namespace StarterAssets
 		{
 			CharacterSwitchInput(value.isPressed);
 		}
+		
+		public void OnFirstAbil(InputValue value)
+		{
+			FirstAbilInput(value.isPressed);
+		}
+		
+		public void OnSecondAbil(InputValue value)
+		{
+			SecondAbilInput(value.isPressed);
+		}
 #endif
 
 
@@ -97,6 +111,16 @@ namespace StarterAssets
 		public void CharacterSwitchInput(bool newCharacterSwitchState)
 		{
 			characterSwitch = newCharacterSwitchState;
+		}
+		
+		public void FirstAbilInput(bool newFirstAbilState)
+		{
+			firstAbil = newFirstAbilState;
+		}
+		
+		public void SecondAbilInput(bool newSecondAbilState)
+		{
+			secondAbil = newSecondAbilState;
 		}
 		
 		private void OnApplicationFocus(bool hasFocus)

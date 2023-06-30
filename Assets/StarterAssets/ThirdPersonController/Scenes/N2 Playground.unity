@@ -1656,7 +1656,6 @@ MonoBehaviour:
   cameraRoot: {fileID: 1316519470}
   cameras: []
   changeChar: {fileID: 1434586387}
-  _bowStrength: 0
   pullingSpeed: 5
 --- !u!4 &835464024 stripped
 Transform:
@@ -4568,7 +4567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8aee1282bf2f2d49abb838e67f8d345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 90
   bulletSpeed: 100
   bulletPrefab: {fileID: 3569061131003070031, guid: 9aeabf85cada8ed48adabf306d9f8751,
     type: 3}
