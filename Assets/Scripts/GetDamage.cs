@@ -13,7 +13,7 @@ public class GetDamage : MonoBehaviour
         if (other.gameObject.CompareTag("Bullet"))
         {
             print("Damage");
-            controller.GetDamage(other.gameObject.GetComponent<BulletProjectile>().damage * damageMultiplayer);
+            controller.GetDamage(other.gameObject.GetComponent<WeaponProjectile>().damage * damageMultiplayer);
         }
     }
 }

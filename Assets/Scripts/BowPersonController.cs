@@ -12,20 +12,26 @@ public class BowPersonController : ThirdPersonShooterControllerBehaviour
         
     protected override void Aim()
     {
+        aimVirtualCamera.gameObject.SetActive(true);
         thirdPersonController.SetRotateOnMove(false);
         animator.SetBool("Aiming", true);
         
         StopCoroutine(DisableShootIK());
         _isDisablingCoroutineStarted = false;
         
+        Vector3 worldAimTarget = _mouseWorldPosition;
+        worldAimTarget.y = transform.position.y;
+        Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
+
+        transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
+        
         float _speed = 20f / (1 - aimRig.weight);
 
-        if (aimRig.weight < 0.99 && !_isEnablingCoroutineStarted)
+        if (aimRig.weight != 1 && !_isEnablingCoroutineStarted)
         {
             StopAllCoroutines();
             StartCoroutine(EnableShootIK(_speed));
             _isEnablingCoroutineStarted = true;
-            print("Courutine started");
         }
         // aimRig.weight = Mathf.Lerp(aimRig.weight, 1f, Time.deltaTime * _speed);
         
@@ -35,10 +41,11 @@ public class BowPersonController : ThirdPersonShooterControllerBehaviour
 
     protected override void DisAim()
     {
+        aimVirtualCamera.gameObject.SetActive(false);
         thirdPersonController.SetRotateOnMove(true);
         animator.SetBool("Aiming", false);
         
-        if (aimRig.weight > 0.01 && !_isDisablingCoroutineStarted)
+        if (aimRig.weight != 0 && !_isDisablingCoroutineStarted)
         {
             StopAllCoroutines();
             StartCoroutine(DisableShootIK());

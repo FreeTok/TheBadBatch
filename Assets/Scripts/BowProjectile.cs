@@ -3,14 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BowProjectile : MonoBehaviour
+public class BowProjectile : WeaponProjectile
 {
-    [HideInInspector]
-    public float damage;
-    protected float _speed;
-    
-    protected Rigidbody rb;
-    
     public void SetupBullet(float newDamage, float speed)
     {
         damage = newDamage;
@@ -23,12 +17,34 @@ public class BowProjectile : MonoBehaviour
     {
         rb = gameObject.AddComponent<Rigidbody>();
         rb.isKinematic = false;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
         
         rb.velocity = transform.forward * _speed;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        rb.isKinematic = true;
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Bullet"))
+        {
+            return;
+        }
+        
+        print(other);
+        transform.SetParent(other.transform);
+
+        Destroy(rb);
     }
+
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.CompareTag("Player") || other.CompareTag("Bullet"))
+    //     {
+    //         return;
+    //     }
+    //     print(other.gameObject);
+    //     print("triggered");
+    //     rb.isKinematic = true;
+    //     rb.constraints = RigidbodyConstraints.FreezeAll;
+    // }
 }

@@ -22,7 +22,7 @@ public class BowWeaponController : WeaponController
     {
         print(damageMult * damage);
         _arrow.parent = null;
-        _arrow.GetComponent<BowProjectile>().SetupBullet(damage * damageMult, bulletSpeed);
+        _arrow.GetComponent<BowProjectile>().SetupBullet(damage * damageMult, bulletSpeed * damageMult);
 
         InstantiateArrow();
     }

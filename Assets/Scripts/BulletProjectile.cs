@@ -3,14 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletProjectile : MonoBehaviour
+public class BulletProjectile : WeaponProjectile
 {
-    [HideInInspector]
-    public float damage;
-    protected float _speed;
-    
-    protected Rigidbody rb;
-    
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -24,7 +18,7 @@ public class BulletProjectile : MonoBehaviour
         Go();
     }
 
-    protected virtual void Go()
+    private void Go()
     {
         rb.velocity = transform.forward * _speed;
     }
